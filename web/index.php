@@ -23,7 +23,8 @@ if (!$path || $path == 'catalog') {
         $dbh = getDbConnection($config);
         $stmt = $dbh->query("SELECT * from catalog WHERE path = '$path' LIMIT 1");
         $item = $stmt->fetch();
-        getHeader('Каталог');
+        $dbh = null;
+        getHeader($item['name']);
         renderItem($item);
         getFooter();
     } catch (PDOException $e) {
